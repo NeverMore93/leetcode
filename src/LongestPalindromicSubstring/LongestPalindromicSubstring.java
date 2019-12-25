@@ -8,12 +8,15 @@ public class LongestPalindromicSubstring {
 
     static String longestPalindrome(String s) {
         String longestPalindromeStr="";
-        int longestPalindromeStrLength;
+        int longestPalindromeStrLength =0;
         int length = s.length();
         String subS;
         int subSLength;
         char[] subSChar;
         for(int i=0;i<length;i++){
+            if(longestPalindromeStrLength+i>=length){
+                continue;
+            }
             for(int j=i+1;j<=length;j++){
                 subS = s.substring(i,j);
                 subSLength = subS.length();
