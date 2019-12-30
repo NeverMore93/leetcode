@@ -4,33 +4,41 @@ import java.util.Arrays;
 
 public class ZigzagConversion {
     public static void main(String args[]){
-        String str  = "LEETCODEISHIRING";
-        convert(str,4);
+        String str  = "AB";
+        convert(str,1);
     }
     static String convert(String s, int numRows) {
+
         int sLength = s.length();
+        if(sLength<2||numRows<2){
+            return s;
+        }
         int blockLength = 2* numRows -2;
         int block = sLength%blockLength==0?sLength/blockLength:sLength/blockLength+1;
         char[] sChar = s.toCharArray();
         char[][] array = new char[block][blockLength];
         int sIndex=0;
         for(int j=0;j<block;j++){
-            for(int k =0;k<blockLength;k++){
+            for(int k =0;k<blockLength&&sIndex<sLength;k++,sIndex++){
                 array[j][k] = sChar[sIndex];
-                sIndex++;
             }
         }
-        System.out.println( Arrays.deepToString(array));
-        StringBuilder result =new StringBuilder("");
+        StringBuilder result =new StringBuilder();
         for(int k =0;k<numRows;k++){
             for(int j=0;j<block;j++){
-                result.append(array[j][k]);
+                String jk = String.valueOf(array[j][k]).trim();
+                if(!"".equals(jk)){
+                    result.append(jk);
+                }
+
                 if(k!=0&&k!=numRows-1){
-                    result.append(array[j][blockLength-k]);
+                    String jbk = String.valueOf(array[j][blockLength-k]).trim();
+                    if(!"".equals(jbk)){
+                        result.append(array[j][blockLength-k]);
+                    }
                 }
             }
         }
-        System.out.println(result.toString());
-        return null;
+        return result.toString();
     }
 }
